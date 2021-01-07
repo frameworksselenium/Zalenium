@@ -1,0 +1,9 @@
+node
+{
+
+stage ('StopZalenium')
+    {
+        sh 'docker stop zalenium'
+    }
+
+}
