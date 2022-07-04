@@ -5,12 +5,15 @@ pipeline {
     }
     stages {
         stage ('Pull-Images'){
-            sh "docker pull elgalu/selenium"
-            sh "docker pull dosel/zalenium"
+             steps {
+                sh "docker pull elgalu/selenium"
+                sh "docker pull dosel/zalenium"
+             }
         }
-
         stage ('Start-Zalenium-Container'){
-            sh "docker run -d --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
+             steps {
+                sh "docker run -d --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
+            }
         }
     }
 }

@@ -5,7 +5,9 @@ pipeline {
     }
     stages {
         stage ('StopZalenium'){
-            sh 'docker stop zalenium'
+             steps {
+                sh 'docker stop zalenium'
+            }
         }
     }
 }   
