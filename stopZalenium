@@ -1,9 +1,7 @@
-node
-{
-
-stage ('StopZalenium')
-    {
-        sh 'docker stop zalenium'
+node{
+    stages{
+        stage ('StopZalenium'){
+            sh 'docker stop zalenium'
+        }
     }
-
-}
+}   
