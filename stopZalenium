@@ -1,6 +1,9 @@
-node{
-
-    stages{
+pipeline {
+    agent any
+    tools {
+        maven "maven3.6.2"
+    }
+    stages {
         stage ('StopZalenium'){
             sh 'docker stop zalenium'
         }

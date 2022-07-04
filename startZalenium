@@ -1,5 +1,9 @@
-node{
-    stages{
+pipeline {
+    agent any
+    tools {
+        maven "maven3.6.2"
+    }
+    stages {
         stage ('Pull-Images'){
             sh "docker pull elgalu/selenium"
             sh "docker pull dosel/zalenium"
