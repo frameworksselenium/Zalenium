@@ -6,7 +6,8 @@ pipeline {
     stages {
         stage ('StopZalenium'){
              steps {
-                sh 'docker stop zalenium'
+                //sh 'docker stop zalenium'
+                sh 'sudo sh docker_kill.sh'
             }
         }
     }
