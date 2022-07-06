@@ -12,8 +12,7 @@ pipeline {
         }
         stage ('Start-Zalenium-Container'){
              steps {
-                //sh 'sh docker_kill.sh'
-                sh 'docker kill $(docker ps -qf expose=8089) 2> /dev/null || echo 'No container running on port 8089'
+                sh 'sh docker_kill.sh'
                 sh "docker run -d --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
                 //sh "docker run --rm -ti --name zalenium -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
                 //sh "docker run --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start "
