@@ -7,8 +7,8 @@ pipeline {
         stage ('Pull-Images'){
              steps {
                  sshagent(['ec2MachinesPemKey']) {
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sh sudo docker pull elgalu/selenium'
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sh sudo docker pull dosel/zalenium'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 docker pull elgalu/selenium'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 docker pull dosel/zalenium'
                  }
              }
         }
