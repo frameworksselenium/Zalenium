@@ -11,11 +11,13 @@ pipeline {
              }
         }
         stage ('Start-Zalenium-Container'){
-             steps {
-                sh 'sh docker_kill.sh'
-                sh "docker run -d --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
-                //sh "docker run --rm -ti --name zalenium -p 4444:4444 -e PULL_SELENIUM_IMAGE=true -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
-                //sh "docker run --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start "
+            sshagent(['ec2MachinesPemKey']) {
+                 steps {
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sh docker_kill.sh'
+                    //sh 'sh docker_kill.sh'
+                    //sh "docker run -d --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 docker run -d --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
+                }
             }
         }
     }
