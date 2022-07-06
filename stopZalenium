@@ -6,9 +6,10 @@ pipeline {
     stages {
         stage ('StopZalenium'){
              steps {
-                //sh 'docker stop zalenium'
-                sh 'sh docker_kill.sh'
-            }
+                 sshagent(['ec2MachinesPemKey']) {
+                      sh "ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo docker stop zalenium"
+                 }
+             }
         }
     }
 }   
