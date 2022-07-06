@@ -7,18 +7,18 @@ pipeline {
         stage ('Pull-Images'){
              steps {
                  sshagent(['ec2MachinesPemKey']) {
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 docker pull elgalu/selenium'
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 docker pull dosel/zalenium'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo docker pull elgalu/selenium'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo docker pull dosel/zalenium'
                  }
              }
         }
         stage ('Start-Zalenium-Container'){
             steps {
                   sshagent(['ec2MachinesPemKey']) {
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sh docker_kill.sh'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo docker_kill.sh'
                     //sh 'sh docker_kill.sh'
                     //sh "docker run -d --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
-                    sh "ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 docker run -d --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo docker run -d --rm -ti --name zalenium -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/videos:/home/seluser/videos --privileged dosel/zalenium start"
                 }
             }
         }
