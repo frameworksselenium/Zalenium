@@ -18,7 +18,7 @@ pipeline {
         stage ('run-docker-compose'){
             steps {
                   sshagent(['ec2MachinesPemKey']) {
-                    sh "ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 docker-compose -f docker-compose.yml"
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo docker-compose -f docker-compose.yml"
                 }
             }
         }
