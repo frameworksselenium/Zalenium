@@ -4,8 +4,8 @@ pipeline {
         maven "maven3.6.2"
     }
     stages {
-        stage ('install&run-docker-compose'){
-             steps {
+        //stage ('install&run-docker-compose'){
+             //steps {
                 // sshagent(['ec2MachinesPemKey']) {
                     //sh 'sudo apt install curl'
                     //sh 'sudo curl -L "https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose'
@@ -16,8 +16,8 @@ pipeline {
                     //sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo chmod +x /usr/bin/docker-compose'
                     //sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo docker up -d'
                 // }
-             }
-        }
+            // }
+       // }
         stage ('run-docker-compose'){
             steps {
                 //  sshagent(['ec2MachinesPemKey']) {
