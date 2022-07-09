@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    tools {
+        maven "maven3.6.2"
+    }
+    stages {
+        stage ('stop-docker-compose'){
+            steps {
+                //  sshagent(['ec2MachinesPemKey']) {
+                    sh "docker-compose stop"
+                    //sh "ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo docker-compose -f docker-compose.yml"
+                //}
+            }
+        }
+    }
+}
