@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    tools {
+        maven "maven3.6.2"
+    }
+    stages {
+        stage ('install&run-docker-compose'){
+             steps {
+                 sshagent(['ec2MachinesPemKey']) {
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo mv /usr/local/bin/docker-compose /usr/bin/docker-compose'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo chmod +x /usr/bin/docker-compose'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 sudo docker up -d'
+                 }
+             }
+        }
+        stage ('run-docker-compose'){
+            steps {
+                  sshagent(['ec2MachinesPemKey']) {
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@54.88.93.45 docker-compose -f docker-compose.yml"
+                }
+            }
+        }
+    }
+}
